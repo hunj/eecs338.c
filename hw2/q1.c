@@ -24,16 +24,20 @@ int main()
 	
 	// Assignment does not require fork error check (pid < 0)
 	if (pid1 == 0 && pid2 != 0) { 
-		printf("Process 1: %d\tParent: %d\n", getpid(), getppid());
-		fflush(stdout);
-
-	}
-	else if (pid1 != 0 && pid2 == 0) {
+		sleep(1);
 		printf("Process 2: %d\tParent: %d\n", getpid(), getppid());
 		fflush(stdout);
 	}
 	else {
 		wait(NULL);
 	}
+
+	if (pid1 != 0 && pid2 == 0) {
+		printf("Process 1: %d\tParent: %d\n", getpid(), getppid());
+	}
+	else {
+		wait(NULL);
+	}
+	
     return 0;
 }

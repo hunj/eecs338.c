@@ -15,17 +15,22 @@ int main()
 {
 	pid_t pid1, pid2;
 
-	printf("Process 0: %d\tParent: %d\n", getpid(), getppid());
+	printf("Process 1: %d\tParent: %d\n", getpid(), getppid());
 	fflush(stdout);
 
 	/* fork a child process */
 	pid1 = fork();	
 	pid2 = fork();
 	
-	// Assignment does not require fork error check (pid < 0)
+	// Assignment does not require fork error check (pid < 0) but here you go <3
+	if (pid1 < 0 || pid2 < 0) {
+		fprintf(stderr, "Fork failed!\n");
+		return -1;
+	}
+
 	if (pid1 == 0 && pid2 != 0) { 
 		sleep(1);
-		printf("Process 2: %d\tParent: %d\n", getpid(), getppid());
+		printf("Process 3: %d\tParent: %d\n", getpid(), getppid());
 		fflush(stdout);
 	}
 	else {
@@ -33,7 +38,7 @@ int main()
 	}
 
 	if (pid1 != 0 && pid2 == 0) {
-		printf("Process 1: %d\tParent: %d\n", getpid(), getppid());
+		printf("Process 2: %d\tParent: %d\n", getpid(), getppid());
 	}
 	else {
 		wait(NULL);

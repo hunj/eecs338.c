@@ -12,3 +12,6 @@ run:	q1.o q2.o q3.o
 	./q2.o
 	echo "Question 3:"
 	./q3.o
+
+clean:	
+	rm *.o

@@ -8,6 +8,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 
@@ -25,7 +26,7 @@ int main() {
 
 		// 1. read user input; parse the command & arguments.
 		gets(line);
-		if (*line == NULL) {
+		if (!*line) {
 			printf("No command entered.\n");
 			exit(-1);
 		}

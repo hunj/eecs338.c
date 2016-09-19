@@ -1,0 +1,25 @@
+Hun Jae Lee (hxl224)
+EECS338 Homework 3
+Due 160921 Wed
+
+---
+
+## How to run:
+
+- `make` if you are lazy (compiles and runs)
+- `make build` to compile
+- `make run` to run (only if compiled though!)
+
+### Notes:
+
+- File naming convention:
+	1. q1.c: Question #1
+	2. q2.c: Question #2
+	3. q3.c: Question #3
+
+### Issues:
+
+- Question 1:
+	- `./sleep` 
+	- Forking issue? Doing invalid
+	- When no command is entered and the return key pressed, 

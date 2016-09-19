@@ -62,9 +62,9 @@ int main() {
 			// give user pretty message
 			printf("Process %ld (%d) total time was %f seconds. x = %lld.\n", processes, getpid(), elapsed_time[processes-1].tv_sec+elapsed_time[processes-1].tv_usec/1000000.0, x);
 			fflush(stdout);
+
+			// since child process's work is done, break out of this entire for-loop.
 			break;
-		} else {
-			continue;
 		}
 		
 	}

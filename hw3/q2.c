@@ -8,6 +8,8 @@
 	1. Takes input N (where 1 <= N <= 4)
 	2. Fork N processes, parallelly count up to 1,000,000,000 using N processes
 	3. Each process reports the time taken to count
+
+	The parent process (this program) does NOT compute anything. Note that it is the child process(es) that does the computing!
 */
 
 #include <stdio.h>
@@ -27,19 +29,21 @@ int main() {
 	int target_sum;
 	int input = 1;
 	pid_t pid;
-	struct timeval start_time[4], stop_time[4], elapsed_time[4];  // timers
 
 	// ask user for number of processes
 	char line[50];
 	printf("How many processes? ");
 	gets(line);
 	input = atoi(line);
-	
-	// validate input
-	if (input < 1 && 4 < input) {
-		fprintf(stderr, "Number of processes must be from 1 to 4! Aborting..\n");
-		return -1;
+
+	// validate input:
+	if (input < 1 || input > 256) {
+		printf("Invalid input, defaulting to 1 process.\n");
+		input = 1;
 	}
+
+	// make arrays for timevals with the size of input
+	struct timeval start_time[input], stop_time[input], elapsed_time[input];
 
 	for (processes = 1; processes <= input; processes++) {
 		pid = fork();
@@ -52,21 +56,21 @@ int main() {
 			fflush(stdout);
 			
 			// record starttime, compute, record endtime, subtract time diff
-			gettimeofday(&start_time[processes-1],NULL);
+			gettimeofday(&start_time[processes-1], NULL);
 			for (i = 0, x = 0; i < N/input; i++) {
 				x = x + 1;
 			}
-			gettimeofday(&stop_time[processes-1],NULL);
+			gettimeofday(&stop_time[processes-1], NULL);
 			timersub(&stop_time[processes-1], &start_time[processes-1], &elapsed_time[processes-1]);
 
 			// give user pretty message
 			printf("Process %ld (%d) total time was %f seconds. x = %lld.\n", processes, getpid(), elapsed_time[processes-1].tv_sec+elapsed_time[processes-1].tv_usec/1000000.0, x);
 			fflush(stdout);
 
-			// since child process's work is done, break out of this entire for-loop.
+			// since child process's work is done, this child process should break out of this entire for-loop.
+			wait(NULL);
 			break;
 		}
-		
 	}
 	wait(NULL);
 	return 0;

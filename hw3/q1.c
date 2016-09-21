@@ -28,7 +28,7 @@ int main() {
 		gets(line);
 		if (!*line) {
 			printf("No command entered.\n");
-			exit(-1);
+			return -1;
 		}
 		args[0] = strtok(line, " ");
 		int i = 0;
@@ -57,7 +57,7 @@ int main() {
 			// 2-3. fork successful, parent waits
 			wait(NULL);
 		}
-
-		// 3. child executes execvp()
 	}
+
+	return 0;
 }

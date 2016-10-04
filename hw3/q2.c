@@ -51,7 +51,7 @@ int main() {
 			fprintf(stderr, "Fork failed! Aborting..\n");
 			return -1;
 		} else if (pid == 0) {
-			// child process
+			// child process     
 			printf("Process %ld (%d) started.\n", processes, getpid());
 			fflush(stdout);
 			

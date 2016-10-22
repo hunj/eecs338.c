@@ -45,13 +45,14 @@ int main(int argc, char *argv[])
   for (i = 0; i < COUNT; i++) {
     global_counter++;
   }
-  printf("parent counter:\t%d", i);
+  printf("parent counter:\t%d\n", i);
+  fflush(stdout);
 
   // end parent turn
   flag[PARENT] = 0;
   pthread_join(tid, NULL);
 
-  printf("global counter:\t%d", global_counter);
+  printf("global counter:\t%d\n", global_counter);
   return 0;
 }
 
@@ -66,7 +67,7 @@ void *child() {
   for (i = 0; i > -1*COUNT; i--) {
     global_counter--;
   }
-  printf("child counter:\t%d", i);
+  printf("child counter:\t%d\n", i);
   fflush(stdout);
 
   // end child turn

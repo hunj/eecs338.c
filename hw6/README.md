@@ -17,6 +17,30 @@ Due 161026 Wed
 
 ### 1. Program output for Peterson’s solution and multithreading design (Problem #1)
 
+```
+$ ./q1.o
+parent counter:	100000000
+child counter:	-100000000
+global counter:	0
+```
+
+When the thread is generated, the signal is given to the child. The child subtracts 10^8 from the `global_counter` which results in -10^8. Then when the signal is given to the parent upon the child thread's termination, 10^8 is added back to `global_counter` which finally results in zero.
+
+### 2. Program output for Peterson’s solution and fork with shared memory design (Problem #2)
+
+```
+$ ./q2.o
+parent counter:	100000000
+child counter:	-100000000
+global counter:	0
+```
+
+The result was the same. This time the parent counted up first then the child counted down.
+
+
+
+
+
 ### Notes:
 
 - File naming convention:
